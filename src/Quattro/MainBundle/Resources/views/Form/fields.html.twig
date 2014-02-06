@@ -1,0 +1,12 @@
+{% block admin_image_widget %}
+    {% spaceless %}
+        {% set subject =  form.vars.sonata_admin.admin.getSubject%}
+        {% if subject.id and subject.path is defined  %}
+            <a href="{{ subject.path| imagine_filter('quattro_369x411') }}" target="_blank">
+                <img src="{{ subject.path| imagine_filter('quattro_369x411') }}" width="200" />
+            </a><br/>
+        {% endif %}
+        {% set type = type|default('file') %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endspaceless %}
+{% endblock %}

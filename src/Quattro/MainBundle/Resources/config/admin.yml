@@ -1,0 +1,27 @@
+services:
+    sonata.admin.taxon:
+        class: Quattro\MainBundle\Admin\TaxonAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "main.admin.group.clasify", label: "admin.taxon" }
+        arguments:
+            - ~
+            - Quattro\MainBundle\Entity\Taxon
+            - ~
+        calls:
+            - [ setTranslationDomain, [admin]]
+    sonata.admin.taxonomy:
+        class: Quattro\MainBundle\Admin\TaxonomyAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "main.admin.group.clasify", label: "admin.taxonomy" }
+        arguments:
+            - ~
+            - Quattro\MainBundle\Entity\Taxonomy
+            - ~
+        calls:
+            - [ setTranslationDomain, [admin]]
+
+    quattro_main.admin.taxon_image:
+        class: Quattro\MainBundle\Admin\TaxonImageAdmin
+        arguments: [~, Quattro\MainBundle\Entity\TaxonImage, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: TaxonImage}

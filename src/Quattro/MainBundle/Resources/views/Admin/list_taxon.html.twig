@@ -1,0 +1,8 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field%}
+    <div>
+        {% set level = object.level %}
+        {% for x in 0..level %}{% if not loop.first %}&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}{% endfor %}{{ object.name }}
+    </div>
+{% endblock %}
