@@ -2,8 +2,8 @@
 
 {% block field%}
     <div>
-       {% if object.image %}
-           <img src="{{ object.image | imagine_filter('quattro_28x28')}}" />
+       {% if object.path is not empty %}
+           <img src="{{ object.path | imagine_filter('quattro_28x28')}}" />
        {% endif %}
     </div>
 {% endblock %}

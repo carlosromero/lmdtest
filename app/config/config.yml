@@ -113,6 +113,9 @@ sonata_admin:
             main.admin.group.clasify:
               label: main.admin.group.clasify
               label_catalogue: admin
+              items:
+                - quattro_main.admin.taxon
+                - quattro_main.admin.tag
 
 sonata_block:
     default_contexts: [cms]

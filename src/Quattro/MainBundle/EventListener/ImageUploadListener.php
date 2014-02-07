@@ -18,8 +18,6 @@ use Quattro\MainBundle\Entity\Business;
 use Quattro\MainBundle\Entity\TaxonImage;
 use Quattro\MainBundle\Uploader\ImageUploaderInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ImageUploadListener implements EventSubscriber
 {
@@ -56,9 +54,7 @@ class ImageUploadListener implements EventSubscriber
         if ($entity instanceof Business) {
             $this->uploadBusinessImage($entity);
         } elseif ($entity instanceof TaxonInterface) {
-           // $this->uploadTaxon($entity);
-        } elseif ($entity instanceof TaxonImage) {
-            $this->uploadTaxonImage($entity);
+            $this->uploadTaxon($entity);
         }
     }
 
@@ -86,22 +82,12 @@ class ImageUploadListener implements EventSubscriber
 
     public function uploadTaxon($subject)
     {
-        var_dump(count($subject->getImages()));die;
-       if (!$subject instanceof TaxonInterface ) {
-           throw new \InvalidArgumentException('TaxonInterface expected.');
+        if (!$subject instanceof TaxonInterface) {
+           throw new \InvalidArgumentException('Taxon expected.');
        }
-        $finalImages = array();
-
-       foreach ($subject->getImages() as $image) {
-           if (null === $image->getId() ) {
-               if ($this->uploader->upload($image)) {
-                   $finalImages[] = $image;
-               }
-           } else {
-               $finalImages[] = $image;
-           }
-       }
-       $subject->setImages($finalImages);
+        if ($subject->hasFile()) {
+           $this->uploader->upload($subject);
+        }
     }
 
     public function uploadTaxonImage($subject)

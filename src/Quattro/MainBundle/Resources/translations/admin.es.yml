@@ -3,3 +3,6 @@ admin.taxon: Taxón
 admin.taxonomy: Taxonomía
 admin.image: Imagen
 admin.label.name: Nombre
+Name: Nombre
+Image: Imagen
+Hide: Ocultar

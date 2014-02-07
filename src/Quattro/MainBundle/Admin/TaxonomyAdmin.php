@@ -20,7 +20,7 @@ class TaxonomyAdmin extends Admin{
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'text', array('label' => 'label.name'))
+            ->add('name', 'text')
         ;
     }
 

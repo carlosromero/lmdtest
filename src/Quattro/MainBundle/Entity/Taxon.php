@@ -14,7 +14,7 @@ namespace Quattro\MainBundle\Entity;
 use Sylius\Bundle\TaxonomiesBundle\Model\Taxon as BaseTaxon;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Taxon extends BaseTaxon implements TaxonInterface
+class Taxon extends BaseTaxon implements TaxonInterface, ImageInterface
 {
 
     /**
@@ -33,11 +33,18 @@ class Taxon extends BaseTaxon implements TaxonInterface
     protected $business;
 
     /**
-     * Images.
+     * File
      *
-     * @var Collection
+     * @var \SplFileInfo
      */
-    protected $images;
+    protected $file;
+
+    /**
+     * Path to file
+     *
+     * @var string
+     */
+    protected $path;
 
     public function __construct()
     {
@@ -102,53 +109,56 @@ class Taxon extends BaseTaxon implements TaxonInterface
         $this->business = $business;
     }
 
-    /**
-    * {@inheritdoc}
-    */
-    public function hasImage(ImageInterface $image)
-    {
-       return $this->images->contains($image);
-    }
 
     /**
-    * {@inheritdoc}
-    */
-    public function getImages()
-    {
-       return $this->images;
-    }
-
-    /**
-    * {@inheritdoc}
-    */
-    public function addImage(ImageInterface $image)
-    {
-       if (!$this->hasImage($image)) {
-           $this->images->add($image);
+        * {@inheritdoc}
+        */
+       public function hasFile()
+       {
+           return null !== $this->file;
        }
-    }
 
-    public function getImage()
-    {
-        return ($this->images->isEmpty())? '': $this->images->first()->getPath();
-    }
-
-    /**
-    * {@inheritdoc}
-    */
-    public function removeImage(ImageInterface $image)
-    {
-       $this->images->removeElement($image);
-    }
-
-    public function setImages($images)
-    {
-       $images = (is_array($images)) ? new ArrayCollection($images) : $images;
-       foreach ($this->images as $image) {
-           $this->removeImage($image);
+       /**
+        * {@inheritdoc}
+        */
+       public function getFile()
+       {
+           return $this->file;
        }
-       foreach ($images as $image) {
-           $this->addImage($image);
+
+       /**
+        * {@inheritdoc}
+        */
+       public function setFile(\SplFileInfo $file)
+       {
+           $this->file = $file;
+
+           return $this;
        }
-    }
+
+       /**
+        * {@inheritdoc}
+        */
+       public function hasPath()
+       {
+           return null !== $this->path;
+       }
+
+       /**
+        * {@inheritdoc}
+        */
+       public function getPath()
+       {
+           return $this->path;
+       }
+
+       /**
+        * {@inheritdoc}
+        */
+       public function setPath($path)
+       {
+           $this->path = $path;
+
+           return $this;
+       }
 }

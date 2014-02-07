@@ -31,21 +31,16 @@ class TaxonAdmin extends Admin{
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $options = array('required' => false);
+        if (($subject = $this->getSubject()) && $subject->getPath()) {
+            $path = $subject->getPath();
+            $options['help'] = '<img src="/media/image/' . $path . '" />';
+        }
         $formMapper
             ->add('name')
             ->add('taxonomy')
             ->add('parent')
-            ->add('images', 'sonata_type_collection',
-                 array(
-                     'required' => false,
-                     'by_reference' => false
-                 ),
-                 array(
-                     'edit' => 'inline',
-                     'inline' => 'table',
-                     'allow_delete' => true
-                 )
-            )
+            ->add('file', 'file', $options)
         ;
 
     }
@@ -65,21 +60,14 @@ class TaxonAdmin extends Admin{
         $listMapper
             ->add('image',null, array('template' => 'QuattroMainBundle:Admin:list_image.html.twig'))
             ->addIdentifier('name',null, array('template' => 'QuattroMainBundle:Admin:list_taxon.html.twig'))
-
+            ->add('_action', 'actions', array(
+                                        'actions' => array(
+                                            'show' => array(),
+                                            'edit' => array(),
+                                            'delete' => array(),
+                                            )
+                                        )
+            )
         ;
-    }
-
-    public function prePersist($taxon)
-    {
-        foreach ($taxon->getImages() as $image) {
-            $image->setTaxon($taxon);
-        }
-    }
-
-    public function preUpdate($taxon)
-    {
-        foreach ($taxon->getImages() as $image) {
-            $image->setTaxon($taxon);
-        }
     }
 }
