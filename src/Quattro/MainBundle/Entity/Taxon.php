@@ -53,7 +53,6 @@ class Taxon extends BaseTaxon implements TaxonInterface, ImageInterface
         $this->createdAt = new \DateTime();
         $this->business = new ArrayCollection();
 
-        $this->images = new ArrayCollection();
     }
 
 
