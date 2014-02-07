@@ -49,7 +49,6 @@ class ImageUploadListener implements EventSubscriber
     public function index(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
         // perhaps you only want to act on some "Product" entity
         if ($entity instanceof Business) {
             $this->uploadBusinessImage($entity);
@@ -63,10 +62,6 @@ class ImageUploadListener implements EventSubscriber
 
     public function uploadBusinessImage($subject)
     {
-        if (!$subject instanceof Business) {
-            throw new \InvalidArgumentException('Business expected.');
-        }
-
         $finalImages = array();
         foreach ($subject->getImages() as $image) {
             if (null === $image->getId() ) {
@@ -82,24 +77,9 @@ class ImageUploadListener implements EventSubscriber
 
     public function uploadTaxon($subject)
     {
-        if (!$subject instanceof TaxonInterface) {
-           throw new \InvalidArgumentException('Taxon expected.');
-       }
         if ($subject->hasFile()) {
            $this->uploader->upload($subject);
         }
     }
-
-    public function uploadTaxonImage($subject)
-       {
-           if (!$subject instanceof TaxonImage) {
-               throw new \InvalidArgumentException('TaxonImage expected.');
-           }
-
-           if ($subject->hasFile()) {
-               $this->uploader->upload($subject);
-           }
-
-       }
 
 }

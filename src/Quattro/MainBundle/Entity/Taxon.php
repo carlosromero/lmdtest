@@ -131,7 +131,9 @@ class Taxon extends BaseTaxon implements TaxonInterface, ImageInterface
        public function setFile(\SplFileInfo $file)
        {
            $this->file = $file;
-
+           if ($this->file) {
+              $this->updatedAt = new \DateTime('now');
+           }
            return $this;
        }
 
