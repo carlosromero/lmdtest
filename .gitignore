@@ -13,3 +13,5 @@
 .DS_STORE
 web/media/cache/*
 web/media/image/*
+Capfile
+app/config/deploy.rb

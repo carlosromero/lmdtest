@@ -107,7 +107,7 @@ fos_user:
 
 sonata_admin:
     title: LoMejorDeTodo - Administrador de contenidos
-    title_logo: /bundles/sonataadmin/logo_lmdt.gif
+    title_logo: /bundles/quattromain/images/logo_lmdt.gif
     dashboard:
         groups:
             main.admin.group.clasify:
