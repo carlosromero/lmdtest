@@ -59,7 +59,10 @@ class TaxonAdmin extends Admin{
     {
         $listMapper
             ->add('image',null, array('template' => 'QuattroMainBundle:Admin:list_image.html.twig'))
-            ->addIdentifier('name',null, array('template' => 'QuattroMainBundle:Admin:list_taxon.html.twig'))
+            ->addIdentifier('name',null, array('template' => 'QuattroMainBundle:Admin:list_taxon.html.twig',
+                                                'sortable' => 'left, name'
+                                                )
+                           )
             ->add('_action', 'actions', array(
                                         'actions' => array(
                                             'show' => array(),
@@ -69,5 +72,15 @@ class TaxonAdmin extends Admin{
                                         )
             )
         ;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $query = parent::createQuery($context);
+        $query->andWhere(
+            $query->expr()->gt($query->getRootAlias() . '.level', ':level')
+        );
+        $query->setParameter('level', 0);
+        return $query;
     }
 }
