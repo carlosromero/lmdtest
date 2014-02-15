@@ -17,7 +17,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Quattro\MainBundle\Entity\Taxon" >
+    <entity name="Quattro\MainBundle\Entity\Taxon" repository-class="Quattro\MainBundle\Repository\TaxonRepository">
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
@@ -27,12 +28,59 @@
         <field name="path" type="string" nullable="true" />
         <many-to-many field="business" mapped-by="taxons" target-entity="Quattro\MainBundle\Entity\Business"/>
 
-        <attribute-overrides>
-            <attribute-override name="permalink">
-                <field nullable="true"></field>
-            </attribute-override>
-        </attribute-overrides>
 
+
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="name" column="name" type="string" />
+        <field name="slug" column="slug" type="string" unique="true">
+            <gedmo:slug fields="name" unique="true" />
+        </field>
+        <field name="permalink" column="permalink" type="string" unique="true" nullable="true">
+            <gedmo:slug fields="name" unique="true" >
+                <gedmo:handler class="Gedmo\Sluggable\Handler\TreeSlugHandler">
+                    <gedmo:handler-option name="parentRelationField" value="parent"/>
+                    <gedmo:handler-option name="separator" value="/"/>
+                </gedmo:handler>
+            </gedmo:slug>
+        </field>
+        <field name="description" column="description" type="text" nullable="true" />
+
+        <many-to-one field="taxonomy" target-entity="Quattro\MainBundle\Entity\Taxonomy">
+            <join-column name="taxonomy_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </many-to-one>
+
+        <many-to-one field="parent" target-entity="Quattro\MainBundle\Entity\Taxon" inversed-by="children">
+            <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
+            <gedmo:tree-parent />
+        </many-to-one>
+
+        <one-to-many field="children" target-entity="Quattro\MainBundle\Entity\Taxon" mapped-by="parent">
+            <cascade>
+                <cascade-all />
+            </cascade>
+            <order-by>
+               <order-by-field name="left" direction="ASC" />
+           </order-by>
+        </one-to-many>
+
+        <order-by>
+            <order-by-field name="left" direction="DESC" />
+        </order-by>
+
+        <field name="left" column="tree_left" type="integer">
+            <gedmo:tree-left />
+        </field>
+        <field name="right" column="tree_right" type="integer">
+            <gedmo:tree-right />
+        </field>
+        <field name="level" column="tree_level" type="integer">
+            <gedmo:tree-level />
+        </field>
+
+        <gedmo:tree type="nested" />
     </entity>
 
 </doctrine-mapping>

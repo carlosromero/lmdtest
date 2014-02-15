@@ -36,12 +36,13 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
             new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
-            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle('FOSUserBundle'),
             new \Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
 
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Lsw\SecureControllerBundle\LswSecureControllerBundle(),
 
             new Quattro\MainBundle\QuattroMainBundle(),
         );

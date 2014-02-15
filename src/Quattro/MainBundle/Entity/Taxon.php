@@ -11,10 +11,10 @@
 
 namespace Quattro\MainBundle\Entity;
 
-use Sylius\Bundle\TaxonomiesBundle\Model\Taxon as BaseTaxon;
+use Quattro\MainBundle\Entity\TaxonBase;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Taxon extends BaseTaxon implements TaxonInterface, ImageInterface
+class Taxon extends TaxonBase implements TaxonInterface, ImageInterface
 {
 
     /**
@@ -162,4 +162,23 @@ class Taxon extends BaseTaxon implements TaxonInterface, ImageInterface
 
            return $this;
        }
+
+        //for sonata admin
+        public function __toString()
+        {
+            $prefix = "";
+            for ($i=2; $i<= $this->level; $i++){
+                $prefix .= "&nbsp;&nbsp;&nbsp;";
+            }
+            return $prefix . $this->name;
+        }
+
+        public function getLaveledName()
+        {
+            $prefix = "";
+            for ($i=2; $i<= $this->level; $i++){
+                $prefix .= "-";
+            }
+            return $prefix . $this->name;
+        }
 }

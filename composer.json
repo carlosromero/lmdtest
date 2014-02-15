@@ -29,7 +29,8 @@
         "sylius/resource-bundle": "1.0.*@dev",
         "sylius/taxonomies-bundle": "1.0.*@dev",
         "knplabs/knp-gaufrette-bundle": "0.1.*",
-        "liip/imagine-bundle": "0.9.*"
+        "liip/imagine-bundle": "0.9.*",
+        "leaseweb/secure-controller-bundle": "*"
 
     },
     "scripts": {

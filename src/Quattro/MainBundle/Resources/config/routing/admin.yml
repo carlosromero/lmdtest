@@ -1,0 +1,7 @@
+taxon_tree_up:
+    pattern: /taxon_tree_up/{taxon_id}
+    defaults:  { _controller: QuattroMainBundle:Taxon:up }
+
+taxon_tree_down:
+    pattern: /taxon_tree_down/{taxon_id}
+    defaults:  { _controller: QuattroMainBundle:Taxon:down }

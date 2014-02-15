@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+
+    {% spaceless %}
+        {% if object.parent.children[object.parent.children|length - 1].id != object.id %}
+            <a href="{{ path('taxon_tree_down', {'taxon_id': object.id}) }}">
+                <i class="icon-arrow-down">&nbsp;</i>
+            </a>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
