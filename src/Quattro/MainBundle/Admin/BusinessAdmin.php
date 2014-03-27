@@ -50,7 +50,7 @@ class BusinessAdmin extends Admin
             ->add('hide', null, array('help'=>'business.hide.help'))
             ->add('name', null, array('help'=>'business.name.help'))
             ->add('taxons')
-            ->add('tags')
+            ->add('tags',null, array('required' => false))
             ->add('description', null, array('attr'=>array('rows'=>10),'help'=>'business.description.help'))
             ->add('address', null, array('attr'=>array('rows'=>5) ,'help'=>'business.address.help'))
             ->add('phone', null, array( 'help'=>'business.phone.help'))
@@ -74,11 +74,26 @@ class BusinessAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('name')
             ->add('slug')
-            ->add('hide')
             ->add('createdAt')
             ->add('updatedAt')
+            ->add('hide', null, array('help'=>'business.hide.help'))
+               ->add('name', null, array('help'=>'business.name.help'))
+               ->add('taxons')
+               ->add('tags')
+               ->add('description', null, array('attr'=>array('rows'=>10),'help'=>'business.description.help'))
+               ->add('address', null, array('attr'=>array('rows'=>5) ,'help'=>'business.address.help'))
+               ->add('phone', null, array( 'help'=>'business.phone.help'))
+               ->add('timeTable', null, array( 'help'=>'business.timetable.help'))
+               ->add('web', null, array( 'help'=>'business.web.help'))
+               ->add('file', 'file', array('required' => false, 'label' => 'Logotipo', 'image_path' => 'logo'))
+               ->add('video', null, array('attr'=>array('rows'=>5), 'help'=>'business.video.help'))
+               ->add('video2', null, array('attr'=>array('rows'=>5), 'help'=>'business.video.help'))
+               ->add('images', 'sonata_type_collection', array('help'=>'business.images.help'), array(
+                               'edit' => 'inline',
+                               'inline' => 'table',
+                               'sortable' => 'position',
+                           ))
         ;
     }
 
