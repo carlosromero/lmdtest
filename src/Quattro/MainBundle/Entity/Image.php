@@ -13,6 +13,8 @@ namespace Quattro\MainBundle\Entity;
 
 class Image implements ImageInterface
 {
+    const SERVER_PATH_TO_IMAGE_FOLDER = '/images/business';
+
     /**
      * Id
      *
@@ -58,9 +60,16 @@ class Image implements ImageInterface
      */
     protected $updatedAt;
 
+    /**
+     *
+     * @var Quattro\MainBundle\Entity\Business
+     */
+    protected $business;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+
     }
 
     /**
@@ -74,57 +83,58 @@ class Image implements ImageInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function hasFile()
-    {
-        return null !== $this->file;
-    }
+        * {@inheritdoc}
+        */
+       public function hasFile()
+       {
+           return null !== $this->file;
+       }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
+       /**
+        * {@inheritdoc}
+        */
+       public function getFile()
+       {
+           return $this->file;
+       }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setFile(\SplFileInfo $file)
-    {
-        $this->file = $file;
+       /**
+        * {@inheritdoc}
+        */
+       public function setFile(\SplFileInfo $file)
+       {
+           $this->file = $file;
+           if ($this->file) {
+              $this->updatedAt = new \DateTime('now');
+           }
+           return $this;
+       }
 
-        return $this;
-    }
+       /**
+        * {@inheritdoc}
+        */
+       public function hasPath()
+       {
+           return null !== $this->path;
+       }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPath()
-    {
-        return null !== $this->path;
-    }
+       /**
+        * {@inheritdoc}
+        */
+       public function getPath()
+       {
+           return $this->path;
+       }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
+       /**
+        * {@inheritdoc}
+        */
+       public function setPath($path)
+       {
+           $this->path = $path;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
+           return $this;
+       }
     /**
      * {@inheritdoc}
      */
@@ -191,6 +201,22 @@ class Image implements ImageInterface
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    /**
+     * @param \Quattro\MainBundle\Entity\Quattro\MainBundle\Entity\Business $business
+     */
+    public function setBusiness($business)
+    {
+        $this->business = $business;
+    }
+
+    /**
+     * @return \Quattro\MainBundle\Entity\Quattro\MainBundle\Entity\Business
+     */
+    public function getBusiness()
+    {
+        return $this->business;
     }
 
 

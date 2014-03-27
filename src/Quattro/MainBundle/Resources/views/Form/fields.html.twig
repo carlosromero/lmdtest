@@ -1,3 +1,17 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block file_widget %}
+    {% spaceless %}
+
+    {{ block('form_widget') }}
+    <br />
+    {% if image_url is not null %}
+        <img src="{{ asset(image_url| imagine_filter('quattro_369x411')) }}"/>
+    {% endif %}
+
+    {% endspaceless %}
+{% endblock %}
+
 {% block admin_image_widget %}
     {% spaceless %}
         {% set subject =  form.vars.sonata_admin.admin.getSubject%}

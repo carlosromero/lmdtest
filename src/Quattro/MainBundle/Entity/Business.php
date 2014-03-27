@@ -11,8 +11,9 @@ namespace Quattro\MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Model\SoftDeletableInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
-class Business implements  SoftDeletableInterface {
+class Business implements  SoftDeletableInterface, ImageInterface {
     /**
      * @var int
      */
@@ -77,13 +78,42 @@ class Business implements  SoftDeletableInterface {
      * @var ArrayCollection
      */
     private $taxons;
-
     /**
      * Images.
      *
      * @var Collection
      */
     protected $images;
+    /**
+     * @var string
+     */
+    protected $logo;
+    /**
+     * @var \SplFileInfo
+     */
+    protected $file;
+    /**
+     * @var string
+     */
+    private $address;
+    /**
+     * @var string
+     *
+     * @Assert\Url()
+     */
+    private $web;
+    /**
+     * @var string
+     */
+    private $map;
+    /**
+     * @var string
+     */
+    private $phone;
+    /**
+     * @var string
+     */
+    private $timeTable;
 
     public function __construct()
     {
@@ -375,9 +405,14 @@ class Business implements  SoftDeletableInterface {
     /**
     * {@inheritdoc}
     */
-    public function getImages()
+    public function getImages($image = null)
     {
-       return $this->images;
+       if ($image) {
+           return $this->images->get($this->images->indexOf($image));
+       } else {
+           return $this->images;
+       }
+
     }
 
     /**
@@ -386,6 +421,7 @@ class Business implements  SoftDeletableInterface {
     public function addImage(ImageInterface $image)
     {
        if (!$this->hasImage($image)) {
+           $image->setBusiness($this);
            $this->images->add($image);
        }
     }
@@ -395,6 +431,7 @@ class Business implements  SoftDeletableInterface {
     */
     public function removeImage(ImageInterface $image)
     {
+       $image->setBusiness(null);
        $this->images->removeElement($image);
     }
 
@@ -407,6 +444,131 @@ class Business implements  SoftDeletableInterface {
        foreach ($images as $image) {
            $this->addImage($image);
        }
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * @param string $map
+     */
+    public function setMap($map)
+    {
+        $this->map = $map;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMap()
+    {
+        return $this->map;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $timeTable
+     */
+    public function setTimeTable($timeTable)
+    {
+        $this->timeTable = $timeTable;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimeTable()
+    {
+        return $this->timeTable;
+    }
+
+    /**
+     * @param string $web
+     */
+    public function setWeb($web)
+    {
+        $this->web = $web;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeb()
+    {
+        return $this->web;
+    }
+
+
+    /**
+    * {@inheritdoc}
+    */
+    public function hasFile()
+    {
+       return null !== $this->file;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function getFile()
+    {
+       return $this->file;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function setFile(\SplFileInfo $file)
+    {
+       $this->file = $file;
+       if ($this->file) {
+          $this->updatedAt = new \DateTime('now');
+       }
+       return $this;
     }
 
 }

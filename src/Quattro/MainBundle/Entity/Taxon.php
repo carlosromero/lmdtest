@@ -166,11 +166,7 @@ class Taxon extends TaxonBase implements TaxonInterface, ImageInterface
         //for sonata admin
         public function __toString()
         {
-            $prefix = "";
-            for ($i=2; $i<= $this->level; $i++){
-                $prefix .= "&nbsp;&nbsp;&nbsp;";
-            }
-            return $prefix . $this->name;
+            return  $this->name;
         }
 
         public function getLaveledName()

@@ -6,3 +6,20 @@ admin.label.name: Nombre
 Name: Nombre
 Image: Imagen
 Hide: Ocultar
+main.admin.group.content: Contenidos
+Business: Local
+Business List: Locales
+Description: Descripción
+Address: Dirección
+Phone: Teléfono
+Time Table: Horario
+Map: Mapa
+business.video.help: Pega aquí el código embed del video de Vimeo, <a href="https://vimeo.com/help/faq_old/embedding#other_site" target="_blank" >instrucciones para conseguir un código</a>
+business.web.help: Escribe la url completa de la web de local, por ejemplo http://www.google.es
+business.address.help: Esta dirección además se usará para cargar el mapa de GoogleMaps
+business.hide.help: Marca este campo si quieres que los usuarios no vean este local
+business.name.help: El nombre del local
+business.description.help: Una breve descripción del local
+business.phone.help: El teléfono de contacto del local
+business.timetable.help: El horario de apertura del local
+business.images.help: Primero hacer click en "Agregar nuevo" <strong>tantas veces como imágenes queramos añadir</strong>, despúes seleccionar las imágenes y hacer click en "Actualizar".<br>Si ya has seleccionado imágenes y haces click en "Agregar nuevo" sin haber actualizado los cambios, la tabla de imágenes se recargará sin guardar esos cambios.<br>Imágenes con extensión .jpeg, .jpg, .gif o .png

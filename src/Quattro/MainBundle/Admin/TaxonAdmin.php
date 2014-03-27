@@ -34,11 +34,6 @@ class TaxonAdmin extends Admin{
         $subject = $this->getSubject();
         $id = $subject->getId();
 
-        $options = array('required' => false);
-        if (($subject = $this->getSubject()) && $subject->getPath()) {
-            $path = $subject->getPath();
-            $options['help'] = '<img src="/media/image/' . $path . '" />';
-        }
         $formMapper
             ->add('name')
             ->add('taxonomy')
@@ -59,7 +54,7 @@ class TaxonAdmin extends Admin{
                                            return $qb;
                                        }
                                    ))
-            ->add('file', 'file', $options)
+            ->add('file', 'file', array('required' => false, 'image_path' => 'path'))
         ;
 
     }

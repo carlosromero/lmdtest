@@ -26,10 +26,6 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="path" type="string" nullable="true" />
-        <many-to-many field="business" mapped-by="taxons" target-entity="Quattro\MainBundle\Entity\Business"/>
-
-
-
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -64,6 +60,9 @@
             <order-by>
                <order-by-field name="left" direction="ASC" />
            </order-by>
+        </one-to-many>
+        <one-to-many target-entity="business" mapped-by="taxons" field="business">
+
         </one-to-many>
 
         <order-by>

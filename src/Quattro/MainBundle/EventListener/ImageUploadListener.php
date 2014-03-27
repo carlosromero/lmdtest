@@ -18,6 +18,7 @@ use Quattro\MainBundle\Entity\Business;
 use Quattro\MainBundle\Entity\TaxonImage;
 use Quattro\MainBundle\Uploader\ImageUploaderInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Quattro\MainBundle\Entity\ImageInterface;
 
 class ImageUploadListener implements EventSubscriber
 {
@@ -52,9 +53,10 @@ class ImageUploadListener implements EventSubscriber
         // perhaps you only want to act on some "Product" entity
         if ($entity instanceof Business) {
             $this->uploadBusinessImage($entity);
-        } elseif ($entity instanceof TaxonInterface) {
-            $this->uploadTaxon($entity);
+        }elseif ($entity instanceof ImageInterface) {
+                    $this->uploadImageInterface($entity);
         }
+
     }
 
 
@@ -62,6 +64,11 @@ class ImageUploadListener implements EventSubscriber
 
     public function uploadBusinessImage($subject)
     {
+        if ($subject->hasFile()) {
+          $this->uploader->upload($subject, 'logo');
+        }
+
+
         $finalImages = array();
         foreach ($subject->getImages() as $image) {
             if (null === $image->getId() ) {
@@ -75,7 +82,7 @@ class ImageUploadListener implements EventSubscriber
         $subject->setImages($finalImages);
     }
 
-    public function uploadTaxon($subject)
+    public function uploadImageInterface($subject)
     {
         if ($subject->hasFile()) {
            $this->uploader->upload($subject);

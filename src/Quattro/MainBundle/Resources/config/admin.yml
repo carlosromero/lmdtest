@@ -26,3 +26,17 @@ services:
             - {name: sonata.admin, manager_type: orm, group: "main.admin.group.clasify", label: Tag}
         calls:
             - [ setTranslationDomain, [admin]]
+    quattro_main.admin.business:
+        class: Quattro\MainBundle\Admin\BusinessAdmin
+        arguments: [~, Quattro\MainBundle\Entity\Business, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "main.admin.group.content", label: Business}
+        calls:
+            - [ setTranslationDomain, [admin]]
+    quattro_main.admin.image:
+        class: Quattro\MainBundle\Admin\ImageAdmin
+        arguments: [~, Quattro\MainBundle\Entity\Image, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "main.admin.group.none", label: Image}
+        calls:
+            - [ setTranslationDomain, [admin]]

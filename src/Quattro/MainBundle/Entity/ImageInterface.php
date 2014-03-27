@@ -30,13 +30,4 @@ interface ImageInterface extends TimestampableInterface
      */
     public function setFile(\SplFileInfo $file);
 
-    /**
-     * @return string
-     */
-    public function getPath();
-
-    /**
-     * @param string $path
-     */
-    public function setPath($path);
 }

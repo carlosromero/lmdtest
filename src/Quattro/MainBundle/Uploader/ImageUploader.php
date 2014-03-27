@@ -23,15 +23,17 @@ class ImageUploader implements ImageUploaderInterface
         $this->filesystem = $filesystem;
     }
 
-    public function upload(ImageInterface $image)
-    {var_dump($image->getPath());
+    public function upload(ImageInterface $image, $fieldName = 'Path')
+    {
         if (!$image->hasFile()) {
             //throw new \InvalidArgumentException('The given image has no file attached.');
             return false;
         }
-
-        if (null !== $image->getPath()) {
-            $this->remove($image->getPath());
+        $fieldName = ucfirst ($fieldName);
+        $getter = 'get'.$fieldName;
+        $setter = 'set'.$fieldName;
+        if (null !== $image->$getter()) {
+            $this->remove($image->$getter());
         }
 
         do {
@@ -39,10 +41,10 @@ class ImageUploader implements ImageUploaderInterface
             $path = $this->expandPath($hash.'.'.$image->getFile()->guessExtension());
         } while ($this->filesystem->has($path));
 
-        $image->setPath($path);
+        $image->$setter($path);
 
         return $this->filesystem->write(
-            $image->getPath(),
+            $image->$getter(),
             file_get_contents($image->getFile()->getPathname())
         );
     }

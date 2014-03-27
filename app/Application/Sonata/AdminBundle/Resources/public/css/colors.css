@@ -58,3 +58,10 @@ div.sonata-ba-field-error .field-short-description {
 .row-0{
     color: #c5c5c5;
 }
+.sonata-bc textarea{
+    min-height: 150px;
+}
+img.admin-preview {
+    max-height: 200px;
+    max-width: 200px;
+}

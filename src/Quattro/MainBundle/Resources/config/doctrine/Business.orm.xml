@@ -10,8 +10,8 @@
         <id name="id" column="id" type="integer">
           <generator strategy="AUTO" />
         </id>
-        <field name="video" type="string" nullable="true" />
-        <field name="video2" type="string" nullable="true" />
+        <field name="video" type="text" nullable="true" />
+        <field name="video2" type="text" nullable="true" />
         <field name="shortDescription" column="short_description" type="string" nullable="true" />
         <field name="metaTitle" column="meta_title" type="string" nullable="true" />
         <field name="metaKeywords" column="meta_keywords" type="string" nullable="true" />
@@ -28,17 +28,31 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
-        <field name="hide" column="hide" type="boolean" nullable="false" />
-       <many-to-many field="taxons" target-entity="Quattro\MainBundle\Entity\Taxon">
-           <join-table name="business_taxon">
-               <join-columns>
-                   <join-column name="product_id" referenced-column-name="id" on-delete="CASCADE" />
-               </join-columns>
-               <inverse-join-columns>
-                   <join-column name="taxon_id" referenced-column-name="id" on-delete="CASCADE" />
-               </inverse-join-columns>
-           </join-table>
-       </many-to-many>
+        <field name="hide" column="hide" type="boolean" nullable="true" />
+        <field name="timeTable" column="time_table" type="string" nullable="true" />
+        <field name="phone" column="phone" type="string" nullable="true" />
+        <field name="web" column="web" type="string" nullable="true" />
+        <field name="logo" column="logo" type="string" nullable="true" />
+        <field name="address" column="address" type="text" nullable="true" />
+        <field name="map" column="map" type="text" nullable="true" />
+        <one-to-many target-entity="Quattro\MainBundle\Entity\Image" mapped-by="business" field="images" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+
+        </one-to-many>
+        <many-to-one field="taxons" target-entity="Quattro\MainBundle\Entity\Taxon" inversed-by="business">
+        </many-to-one>
+        <many-to-many field="tags" target-entity="Quattro\MainBundle\Entity\Tag">
+                   <join-table name="business_tag">
+                       <join-columns>
+                           <join-column name="product_id" referenced-column-name="id" on-delete="CASCADE" />
+                       </join-columns>
+                       <inverse-join-columns>
+                           <join-column name="tag_id" referenced-column-name="id" on-delete="CASCADE" />
+                       </inverse-join-columns>
+                   </join-table>
+                </many-to-many>
         <gedmo:soft-deleteable field-name="deletedAt" />
 
     </entity>
