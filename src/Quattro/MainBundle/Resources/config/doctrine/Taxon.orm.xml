@@ -61,7 +61,7 @@
                <order-by-field name="left" direction="ASC" />
            </order-by>
         </one-to-many>
-        <one-to-many target-entity="business" mapped-by="taxons" field="business">
+        <one-to-many target-entity="Quattro\MainBundle\Entity\Business" mapped-by="taxons" field="business">
 
         </one-to-many>
 
