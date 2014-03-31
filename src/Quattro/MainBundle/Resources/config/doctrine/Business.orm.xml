@@ -33,6 +33,8 @@
         <field name="phone" column="phone" type="string" nullable="true" />
         <field name="web" column="web" type="string" nullable="true" />
         <field name="logo" column="logo" type="string" nullable="true" />
+        <field name="fax" column="fax" type="string" nullable="true" />
+        <field name="email" column="email" type="string" nullable="true" />
         <field name="address" column="address" type="text" nullable="true" />
         <field name="map" column="map" type="text" nullable="true" />
         <one-to-many target-entity="Quattro\MainBundle\Entity\Image" mapped-by="business" field="images" orphan-removal="true">

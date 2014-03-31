@@ -21,5 +21,7 @@ business.hide.help: Marca este campo si quieres que los usuarios no vean este lo
 business.name.help: El nombre del local
 business.description.help: Una breve descripción del local
 business.phone.help: El teléfono de contacto del local
+business.fax.help: El fax del local
+business.email.help: El email de contacto del local
 business.timetable.help: El horario de apertura del local
 business.images.help: Primero hacer click en "Agregar nuevo" <strong>tantas veces como imágenes queramos añadir</strong>, despúes seleccionar las imágenes y hacer click en "Actualizar".<br>Si ya has seleccionado imágenes y haces click en "Agregar nuevo" sin haber actualizado los cambios, la tabla de imágenes se recargará sin guardar esos cambios.<br>Imágenes con extensión .jpeg, .jpg, .gif o .png

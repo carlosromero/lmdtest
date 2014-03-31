@@ -114,6 +114,16 @@ class Business implements  SoftDeletableInterface, ImageInterface {
      * @var string
      */
     private $timeTable;
+    /**
+     * @var string
+     */
+    private $fax;
+    /**
+     * @var string
+     *
+     * @Assert\Email()
+     */
+    private $email;
 
     public function __construct()
     {
@@ -570,5 +580,39 @@ class Business implements  SoftDeletableInterface, ImageInterface {
        }
        return $this;
     }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $fax
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+
 
 }

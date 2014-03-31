@@ -53,6 +53,8 @@ class BusinessAdmin extends Admin
             ->add('description', null, array('attr'=>array('rows'=>10),'help'=>'business.description.help'))
             ->add('address', null, array('attr'=>array('rows'=>5) ,'help'=>'business.address.help'))
             ->add('phone', null, array( 'help'=>'business.phone.help'))
+            ->add('fax', null, array( 'help'=>'business.fax.help'))
+            ->add('email', null, array( 'help'=>'business.email.help'))
             ->add('timeTable', null, array( 'help'=>'business.timetable.help'))
             ->add('web', null, array( 'help'=>'business.web.help'))
             ->add('file', 'file', array('required' => false, 'label' => 'Logotipo', 'image_path' => 'logo'))
