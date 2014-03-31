@@ -33,7 +33,6 @@ class BusinessAdmin extends Admin
             ->add('hide')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
