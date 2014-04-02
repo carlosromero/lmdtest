@@ -24,7 +24,9 @@ class TaxonController extends Controller {
         if ($taxon->getParent()){
             $repo->moveUp($taxon);
         }
-        return $this->redirect($this->getRequest()->headers->get('referer'));
+        $url = $this->getRequest()->headers->get('referer') ? $this->getRequest()->headers->get('referer') : $this->generateUrl('admin_quattro_main_taxon_list');
+
+        return $this->redirect($url);
     }
 
     /**
@@ -38,7 +40,9 @@ class TaxonController extends Controller {
         if ($taxon->getParent()){
             $repo->moveDown($taxon);
         }
-        return $this->redirect($this->getRequest()->headers->get('referer'));
+        $url = $this->getRequest()->headers->get('referer') ? $this->getRequest()->headers->get('referer') : $this->generateUrl('admin_quattro_main_taxon_list');
+
+        return $this->redirect($url);
     }
 
 }
