@@ -2,6 +2,7 @@
 
 namespace Quattro\MainBundle\Admin;
 
+use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -48,8 +49,16 @@ class BusinessAdmin extends Admin
         $formMapper
             ->add('hide', null, array('help'=>'business.hide.help'))
             ->add('name', null, array('help'=>'business.name.help'))
-            ->add('taxons')
-            ->add('tags',null, array('required' => false))
+            ->add('taxons', null, array('property'=>'LaveledName','query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('t')
+                        ->andWhere('t.level>:level')
+                        ->setParameter('level', 0)
+                        ->orderBy('t.left', 'ASC');
+                }))
+            ->add('tags',null, array('required' => false, 'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('t')
+                        ->orderBy('t.name', 'ASC');
+                }))
             ->add('description', null, array('attr'=>array('rows'=>10),'help'=>'business.description.help'))
             ->add('address', null, array('attr'=>array('rows'=>5) ,'help'=>'business.address.help'))
             ->add('phone', null, array( 'help'=>'business.phone.help'))
