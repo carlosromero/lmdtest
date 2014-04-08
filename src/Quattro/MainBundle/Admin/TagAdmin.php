@@ -10,6 +10,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class TagAdmin extends Admin
 {
+    protected $maxPerPage = 200;
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -18,7 +20,6 @@ class TagAdmin extends Admin
         $datagridMapper
             ->add('name')
             ->add('hide')
-            ->add('id')
         ;
     }
 
@@ -28,7 +29,6 @@ class TagAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->addIdentifier('name')
             ->add('hide')
             ->add('_action', 'actions', array(
@@ -57,7 +57,6 @@ class TagAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('name')
             ->add('slug')
             ->add('hide')

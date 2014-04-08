@@ -18,7 +18,6 @@ class ImageAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
-            ->add('id')
         ;
     }
 
@@ -28,7 +27,6 @@ class ImageAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->addIdentifier('name')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -82,7 +80,6 @@ class ImageAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('title')
             ->add('alt')
             ->add('file')

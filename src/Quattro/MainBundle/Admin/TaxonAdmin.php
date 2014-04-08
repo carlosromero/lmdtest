@@ -25,8 +25,8 @@ class TaxonAdmin extends Admin{
         '_sort_by' => 'left',  // name of the ordered field
                                  // (default = the model's id field, if any)
         // the '_sort_by' key can be of the form 'mySubModel.mySubSubModel.myField'.
-        '_per_page' => '1000'
     );
+    protected $maxPerPage = 200;
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)

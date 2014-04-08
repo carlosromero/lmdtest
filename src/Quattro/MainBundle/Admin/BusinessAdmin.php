@@ -11,6 +11,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class BusinessAdmin extends Admin
 {
+    protected $maxPerPage = 200;
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -19,7 +21,6 @@ class BusinessAdmin extends Admin
         $datagridMapper
             ->add('name')
             ->add('hide')
-            ->add('id')
         ;
     }
 
@@ -29,7 +30,6 @@ class BusinessAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->addIdentifier('name')
             ->add('hide')
             ->add('_action', 'actions', array(
@@ -83,7 +83,6 @@ class BusinessAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('slug')
             ->add('createdAt')
             ->add('updatedAt')
